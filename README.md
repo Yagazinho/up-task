@@ -1,50 +1,70 @@
-# React + TypeScript + Vite
+## How to run the app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. clone repository and download files
+2. run application with the command npm run dev
 
-Currently, two official plugins are available:
+    Documenting the Thought Process for Creating the Radio Component
+   
+📌 Define Requirements
+The goal was to create a React component that:
+Allows users to select an option from a group of radio buttons.
+Persists the selected option across page refreshes using localStorage.
+Includes a text box for entering a discount code with basic validation.
+Has a button to generate and display a mock discount code.
+Provides a text area for users to enter notes or comments, with the text being stored in the application state.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📌 Component Design
+State Management
+Selected Option:
+Purpose: Store the currently selected radio button option.
+Implementation: Use useState to manage the selected option and localStorage to persist it across page refreshes.
 
-## Expanding the ESLint configuration
+Discount Code:
+Purpose: Store the discount code entered by the user and validate it.
+Implementation: Use useState to manage the discount code and a regular expression to validate it.
+Generated Code:
+Purpose: Store and display a randomly generated discount code.
+Implementation: Use useState to store the generated code and a function to create it.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Notes:
+Purpose: Store user-entered notes or comments.
+Implementation: Use useState to manage the notes.
 
-- Configure the top-level `parserOptions` property like this:
+b. User Interface
+Radio Buttons:
+Create a group of radio buttons with options A, B, and C.
+Ensure that selecting a radio button updates the state and persists it using localStorage.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Discount Code Input:
+Add an input field for entering the discount code.
+Implement validation using a regular expression to ensure the code contains only letters and numbers.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Generate Discount Code Button:
+Add a button that, when clicked, generates a random alphanumeric discount code.
+Display the generated code to the user.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Notes Text Area:
+Add a text area for entering notes or comments.
+Update the state with the content of the text area.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+📌3. Implementation Steps
+a. Create the Component
+Use React.FC to define a functional component.
+Initialize state variables using useState.
+Implement event handlers for updating state based on user interactions.
+
+b. Implement Persistence
+On component mount, retrieve the selected option from localStorage and set it in the state.
+Update localStorage whenever the selected option changes.
+
+c. Validate and Generate Code
+Use a regular expression to validate the discount code.
+Create a function to generate a random alphanumeric string for the mock discount code.
+
+d. Render the UI
+Use Tailwind CSS for styling the component.
+Render radio buttons, input fields, buttons, and text areas with appropriate styling and layout.
+
+📌4. Testing and Validation
+Test the component by interacting with all its features: selecting radio buttons, entering discount codes, generating mock codes, and typing notes.
+Validate that the state is updated correctly and persists across page refreshes.
